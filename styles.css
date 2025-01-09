@@ -1,0 +1,154 @@
+body {
+  background-color: #393e46;
+}
+
+.container {
+  width: 70%;
+  margin: auto;
+  margin-bottom: 0px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+h1 {
+  margin: 5px;
+  font-family: "Lobster", cursive;
+  text-shadow: 5px 0 #232931;
+  font-size: 6rem;
+  color: #4ecca3;
+}
+
+
+.player-container
+{
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+.player-name {
+  font-size: 3rem;
+  color: white;
+  font-family: "Indie Flower", cursive;
+  margin-bottom: 0px;
+  margin-top: 10px;
+}
+
+.dice {
+  text-align: center;
+  display: inline-block;
+}
+ 
+.dice-shape
+{
+  margin: 30px;
+  background-color: white;
+  height: 13rem;
+  width: 13rem;
+  border: 1px solid black;
+  box-shadow: 5px 5px 10px;
+  border-radius: 25px;
+  display: grid;
+  grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+  align-items: center;
+  justify-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+  margin-top: 8px;
+}
+
+.dice-dots
+{
+  background-color: hsl(160, 55%, 20%);;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.dot-1
+{
+  grid-area: 1 / 1;   /* height + width */
+  
+}
+
+.dot-2
+{
+  grid-area: 1 / 3;  /* height + width */
+  
+}
+.dot-3
+{
+  grid-area: 2 / 1;   /* height + width */
+  
+}
+.dot-4
+{
+  grid-area: 2 / 2;   /* height + width */
+  
+}
+
+.dot-5
+{
+  grid-area: 2 / 3;   /* height + width */
+  
+}
+.dot-6
+{
+  grid-area: 3 / 1;   /* height + width */
+  
+}
+.dot-7
+{
+  grid-area: 3 / 3;   /* height + width */
+  
+}
+
+
+
+
+footer {
+  margin-top: 5%;
+  color: #eeeeee;
+  text-align: center;
+  font-family: "Indie Flower", cursive;
+}
+
+
+
+.hidden
+{
+  display: none;
+}
+
+
+button
+{
+  text-align: center;
+  color: hsl(160, 55%, 20%);
+  font-family: "Indie Flower", cursive;
+  border-radius: 25px;
+  box-sizing: border-box;
+  border: 1px solid black;
+  box-shadow: 5px 5px 10px black;
+}
+
+#start-button
+{
+  height: 100px;
+  width: 300px;
+  font-size: 50px;
+}
+
+#score-button
+{
+  height: 100px;
+  width: 300px;
+  font-size: 50px;
+}
+
+
+
+footer
+{
+  font-size: 30px;
+}
