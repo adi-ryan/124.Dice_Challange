@@ -130,14 +130,31 @@ button
   box-sizing: border-box;
   border: 1px solid black;
   box-shadow: 5px 5px 10px black;
+  margin: 10px;
 }
 
+button:hover
+{
+  color: white;
+  background-color: hsl(160, 55%, 20%);
+  background-color: black;
+  
+}
+
+button:active
+{
+  background-color: black;
+  background-color: hsl(160, 55%, 20%);
+  
+}
 #start-button
 {
   height: 100px;
   width: 300px;
   font-size: 50px;
 }
+
+
 
 #score-button
 {
