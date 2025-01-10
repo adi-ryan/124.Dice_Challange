@@ -1,111 +1,82 @@
-var wasStartButtonClicked = false;
+document.querySelector("#roll-dice").addEventListener("click", start);
 
-document.querySelector("#start-button").addEventListener("click", function () {
-  start();
-});
-
-function diceReset() {
-  for (let i = 1; i <= 7; i++) {
-    for (let y = 1; y < 3; y++) {
-      document
-        .querySelector("#" + "player" + 1 + " div.dot-" + i)
-        .setAttribute("class", "dice-dots dot-" + i);
-        console.log(document
-            .querySelector("#" + "player" + y + " div.dot-" + i)
-            .getAttribute("class"));
-    }
-  }
-}
 
 function start() {
-  let player1roll = rollDice(6);
-  let player2roll = rollDice(6);
-  console.log(player1roll);
-  console.log(player2roll);
-  dice(1, player1roll);
-  dice(2, player2roll);
-  playerWinMessage(player1roll, player2roll);
+  resetDice("player2");
+  resetDice("player1");
+  let player1Roll = rollDice(6);
+  let player2Roll = rollDice(6);
+  dice("player1", player1Roll);
+  dice("player2", player2Roll);
+  
+
+  winnerMessage(player1Roll, player2Roll);
 }
 
-//dice structure: made with divs inside a grid display
-function dice(specifyPlayer, dice) {
-    diceReset();
-  // ******   !!IMPORTANT!! values of specifyPlayer parameter should  be 1 or 2
-  // (concat with player as element id => example: if you choose 1 id will be player1 ) ******//
-  // ******   !!IMPORTANT!! value of dice has to be between 1 and 6   ******//
-  if (specifyPlayer === 1 || (specifyPlayer === 2 && dice > 0 && dice < 7)) {
-    if (specifyPlayer === 1) specifyPlayer = "player1";
-    else specifyPlayer = "player2";
+function resetDice(playerSelect) {
+  
 
-    let divToHide;
-    let divToUnhide;
-    switch (dice) {
-      case 1:
-        divToHide = [1, 2, 3, 5, 6, 7];
-        //divToUnhide = [4];
-        break;
-
-      case 2:
-        divToHide = [1, 3, 4, 5, 7];
-        //divToUnhide = [2, 6];
-        break;
-
-      case 3:
-        divToHide = [1, 3, 5, 7];
-        //divToUnhide = [2, 4, 6];
-        break;
-
-      case 4:
-        divToHide = [3, 4, 5];
-        //divToUnhide = [1, 2, 6, 7];
-        break;
-
-      case 5:
-        divToHide = [3, 5];
-        //divToUnhide = [1, 2, 4, 6, 7];
-        break;
-
-      case 6:
-        divToHide = [4];
-        //divToUnhide = [1, 2, 3, 5, 6, 7];
-        break;
-    }
+  for (let i = 1; i <= 7; i++) {
+    let searchFilter = "#" + playerSelect + " div.dot-" + i;
+    document
+      .querySelector(searchFilter)
+      .setAttribute("class", "dice-dots dot-" + i);
     
-    // ADDING "hide" to its class to hide the required dots
-    for (let i = 0; i < divToHide.length; i++) {
-      let editPart = document.querySelector(
-        "#" + specifyPlayer + " div" + ".dot-" + divToHide[i]
-      );
-      let currentClassToHide = editPart.getAttribute("class");
-      editPart.setAttribute("class", currentClassToHide + " hidden");
-      console.log(currentClassToHide);
-    }
-
-    //szfvb vnbv
-  } else {
-    console.log(
-      "dice function: wrong parameters \n" +
-        "dice(1,2) => first paremeter should be the player number 1 or 2\n" +
-        " second parameter should be between 1 and 6 inclusive"
-    );
-    console.log("player" + specifyPlayer + ": " + dice);
   }
 }
 
-// randomise a number 1 to maxNumber
-function rollDice(maxNumber) {
-  return Math.floor(Math.random() * maxNumber) + 1;
+function winnerMessage(p1DiceRoll, p2DiceRoll) {
+  var $0 = document.querySelector("h1");
+  if (p1DiceRoll > p2DiceRoll) $0.innerHTML = "Player 1 WON!";
+  else if (p1DiceRoll < p2DiceRoll) $0.innerHTML = "Player 2 WON!!";
+  else $0.innerHTML = "It's a draw";
 }
 
-// player message
-function playerWinMessage(player1, player2) {
-  let result;
-  if (player1 > player2) result = "Player 1 WON!";
-  else if (player1 < player2) result = "Player 2 WON!";
-  else result = "Draw";
-  titleTextContent(result);
+// dice change logic
+function dice(player, diceRoll) {
+  
+  let dotsToHide = [];
+  // switching each dice number (1-to-6) to dots to hide
+  switch (diceRoll) {
+    case 1:
+      dotsToHide = [1, 2, 3, 5, 6, 7];
+      break;
+
+    case 2:
+      dotsToHide = [1, 3, 4, 5, 7];
+      break;
+
+    case 3:
+      dotsToHide = [1, 3, 5, 7];
+      break;
+
+    case 4:
+      dotsToHide = [3, 4, 5];
+      break;
+
+    case 5:
+      dotsToHide = [3, 5];
+      break;
+
+    case 6:
+      dotsToHide = [4];
+  }
+
+ 
+
+  // looping trough dots to toggle the hidden dots
+  for (let i = 0; i < dotsToHide.length; i++) {
+    let searchFilter = "#" + player + " div.dot-" + dotsToHide[i];
+    let classContainer = document.querySelector(searchFilter);
+    let classContent = classContainer.getAttribute("class");
+    classContainer.setAttribute(
+      "class",
+      "dice-dots dot-" + dotsToHide[i] + " hidden"
+    );
+  }
 }
 
-function titleTextContent(message) {
-  document.querySelector("h1").textContent = message;
+// random dice generator
+function rollDice(maxNum) {
+  return Math.floor(Math.random() * maxNum) + 1;
 }
